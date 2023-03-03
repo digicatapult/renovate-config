@@ -1,0 +1,70 @@
+{
+	"extends": [
+		"config:base",
+		":rebaseStalePrs",
+		":timezone(Europe/London)"
+	],
+	"enabledManagers": [
+		"npm",
+		"docker",
+		"docker-compose",
+		"github-actions"
+	],
+	"prCreation": "not-pending",
+	"npm": {
+		"labels": [
+			"dependencies",
+			"npm"
+		],
+		"extends": [
+			":unpublishSafe",
+			"helpers:disableTypesNodeMajor"
+		],
+		"rangeStrategy": "bump",
+		"bumpVersion": "patch",
+		"automergeType": "pr",
+		"updateLockFiles": true,
+		"major": {
+			"automerge": false
+		},
+		"packageRules": [
+			{
+				"description": "merge minor and patch updates into a single PR",
+				"groupName": "npm - all minor and patch updates",
+				"matchUpdateTypes": [
+					"minor",
+					"patch"
+				],
+				"automerge": true,
+				"stabilityDays": 3
+			},
+			{
+				"description": "disable package.json > engines update",
+				"depTypeList": [
+					"engines"
+				],
+				"enabled": false
+			}
+		]
+	},
+	"github-actions": {
+		"labels": [
+			"dependencies",
+			"github-actions"
+		],
+		"groupName": "GitHub Actions - updates"
+	},
+	"packageRules": [
+		{
+			"matchManagers": [
+				"docker",
+				"docker-compose"
+			],
+			"groupName": "Docker - updates",
+			"labels": [
+				"dependencies",
+				"docker"
+			]
+		}
+	]
+}
