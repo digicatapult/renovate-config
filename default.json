@@ -10,7 +10,6 @@
 		"docker-compose",
 		"github-actions"
 	],
-	"prCreation": "not-pending",
 	"npm": {
 		"labels": [
 			"dependencies",
