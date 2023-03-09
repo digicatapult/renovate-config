@@ -3,10 +3,10 @@
 ## Usage
 
 ### Organisation setup
+Get a github orgnisation administrator to:
+- Ensure renovatebot is added with [access to the repository](https://github.com/apps/renovate) in the org.
 
-Ensure renovatebot is added with [access to all repositories](https://github.com/apps/renovate)
-
-Ensure renovate approver is added with [access to all repositories](https://github.com/apps/renovate-approve)
+- Ensure renovate approver is added with [access to the repository](https://github.com/apps/renovate-approve) in the org.
 
 ### Repository Setup
 
