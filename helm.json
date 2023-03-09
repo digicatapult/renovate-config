@@ -1,0 +1,43 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"github>digicatapult/renovate-config"
+	],
+	"enabledManagers": [
+		"github-actions",
+		"helmv3",
+		"helm-values",
+		"regex"
+	],
+	"helmv3": {
+		"automerge": false
+	},
+	"helm-values": {
+		"automerge": false
+	},
+	"regexManagers": [
+		{
+			"fileMatch": [
+				"(^|/)Chart\\.yaml$"
+			],
+			"matchStrings": [
+				"#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)"
+			],
+			"datasourceTemplate": "docker"
+		}
+	],
+	"packageRules": [
+		{
+			"groupName": "Helm",
+			"matchManagers": [
+				"helmv3",
+				"helm-values"
+			],
+			"bumpVersion": "patch",
+			"labels": [
+				"dependencies",
+				"helm"
+			]
+		}
+	]
+}
