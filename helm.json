@@ -31,7 +31,8 @@
 			"groupName": "Helm",
 			"matchManagers": [
 				"helmv3",
-				"helm-values"
+				"helm-values",
+				"regex"
 			],
 			"bumpVersion": "patch",
 			"labels": [
