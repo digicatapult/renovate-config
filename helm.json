@@ -36,6 +36,7 @@
 			],
 			"bumpVersion": "patch",
 			"automerge": false,
+			"matchUpdateTypes": ["major", "minor", "patch"],
 			"labels": [
 				"dependencies",
 				"helm"
