@@ -35,6 +35,7 @@
 				"regex"
 			],
 			"bumpVersion": "patch",
+			"automerge" false,
 			"labels": [
 				"dependencies",
 				"helm"
