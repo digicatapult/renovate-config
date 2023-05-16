@@ -30,7 +30,8 @@
 				"matchUpdateTypes": [
 					"minor",
 					"patch"
-				]
+				],
+				"excludePackageNames": ["jsonrpsee"]
 			}
 		]
 	},
