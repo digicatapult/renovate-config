@@ -78,19 +78,7 @@
 			"dependencies",
 			"github-actions"
 		],
-		"groupName": "GitHub Actions - updates",
-		"packageRules": [
-			{
-				"matchPackageNames": [
-					"actions/checkout"
-				],
-				"extends": [
-					"schedule:automergeNonOfficeHours"
-				],
-				"matchUpdateTypes":["major"],
-				"automerge": true
-			}
-		]
+		"groupName": "GitHub Actions - updates"
 	},
 	"packageRules": [
 		{
