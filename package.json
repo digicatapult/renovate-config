@@ -4,7 +4,8 @@
   "description": "Renovate Preset for Digital Catapult",
   "files": [
     "default.json",
-		"helm.json"
+		"helm.json",
+    "poetry.json"
   ],
   "repository": "git://github.com/digicatapult/renovate-config",
   "homepage": "https://github.com/digicatapult/renovate-config",
