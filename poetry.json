@@ -5,7 +5,7 @@
 	],
 	"enabledManagers": [
 		"npm",
-		"docker",
+		"dockerfile",
 		"docker-compose",
 		"github-actions",
 		"cargo",
