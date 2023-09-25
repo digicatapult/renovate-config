@@ -1,0 +1,33 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"github>digicatapult/renovate-config"
+	],
+	"poetry": {
+		"enabled": true,
+		"labels": [
+			"dependencies",
+			"poetry"
+		],
+		"updateLockFiles": true,
+		"rangeStrategy": "bump",
+		"bumpVersion": "patch",
+		"major": {
+			"automerge": false
+		},
+		"packageRules": [
+			{
+				"description": "merge minor and patch updates into a single PR",
+				"groupName": "poetry - all minor and patch updates",
+				"extends": [
+					"schedule:automergeNonOfficeHours"
+				],
+				"matchUpdateTypes": [
+					"minor",
+					"patch"
+				],
+				"stabilityDays": 3
+			}
+		]
+	}
+}
