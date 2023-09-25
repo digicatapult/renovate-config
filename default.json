@@ -6,7 +6,7 @@
 	],
 	"enabledManagers": [
 		"npm",
-		"docker",
+		"dockerfile",
 		"docker-compose",
 		"github-actions",
 		"cargo"
@@ -83,7 +83,7 @@
 	"packageRules": [
 		{
 			"matchManagers": [
-				"docker",
+				"dockerfile",
 				"docker-compose"
 			],
 			"groupName": "Docker - updates",
