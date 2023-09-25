@@ -3,8 +3,15 @@
 	"extends": [
 		"github>digicatapult/renovate-config"
 	],
+	"enabledManagers": [
+		"npm",
+		"docker",
+		"docker-compose",
+		"github-actions",
+		"cargo",
+		"poetry"
+	],
 	"poetry": {
-		"enabled": true,
 		"labels": [
 			"dependencies",
 			"poetry"
