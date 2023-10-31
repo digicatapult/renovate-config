@@ -78,7 +78,22 @@
 			"dependencies",
 			"github-actions"
 		],
-		"groupName": "GitHub Actions - updates"
+		"groupName": "GitHub Actions - updates",
+		"packageRules":[
+			{ "matchUpdateTypes": ["major"],
+			  "matchPackageNames": [
+					"actions/checkout",
+					"actions/setup-node",
+					"actions/setup-python",
+					"actions/cache"
+				],
+				"automerge": true,
+				"groupName": "Github-Actions - trusted major updates",
+				"extends": [
+					"schedule:automergeNonOfficeHours"
+				]
+				}
+		]
 	},
 	"packageRules": [
 		{
