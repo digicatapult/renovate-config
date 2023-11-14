@@ -34,6 +34,12 @@
 					"patch"
 				],
 				"stabilityDays": 3
+			},
+			{
+				"matchPackageNames": [
+					"python"
+				],
+				"enabled": false
 			}
 		]
 	}
