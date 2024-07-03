@@ -62,7 +62,10 @@
 					"patch"
 				],
 				"automerge": true,
-				"stabilityDays": 3
+				"stabilityDays": 3,
+				"excludePackagePatterns": [
+					"tsoa@6.3.1"
+				]
 			},
 			{
 				"description": "disable package.json > engines update",
@@ -82,6 +85,10 @@
 					"3.x"
 				],
 				"groupName": "eslint-plugin-prettier v5 and prettier v3 upgrade"
+			},
+			{
+				"packageNames": ["tsoa"],
+				"allowedVersions": "!=6.3.1"
 			}
 		]
 	},
