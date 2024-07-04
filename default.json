@@ -63,9 +63,7 @@
 				],
 				"automerge": true,
 				"stabilityDays": 3,
-				"excludePackagePatterns": [
-					"tsoa@6.3.1"
-				]
+				"excludePackageNames": ["tsoa"]
 			},
 			{
 				"description": "disable package.json > engines update",
@@ -88,7 +86,7 @@
 			},
 			{
 				"packageNames": ["tsoa"],
-				"allowedVersions": "!=6.3.1"
+				"ignoreVersions": ["6.3.1"]
 			}
 		]
 	},
