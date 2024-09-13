@@ -75,26 +75,6 @@
 				"enabled": false
 			},
 			{
-				"description": "upgrade eslint-plugin-prettier to v5 and prettier to v3 in a single PR",
-				"matchPackageNames": [
-					"eslint-plugin-prettier",
-					"prettier"
-				],
-				"matchVersions": [
-					"5.x",
-					"3.x"
-				],
-				"groupName": "eslint-plugin-prettier v5 and prettier v3 upgrade"
-			},
-			{
-				"matchPackageNames": [
-					"tsoa"
-				],
-				"ignoreVersions": [
-					"6.3.1"
-				]
-			},
-			{
 				"description": "Downgrade TypeScript to version 5.5.4",
 				"matchPackageNames": [
 					"typescript"
