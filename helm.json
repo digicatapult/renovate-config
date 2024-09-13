@@ -7,7 +7,7 @@
 		"github-actions",
 		"helmv3",
 		"helm-values",
-		"regex"
+		"custom.regex"
 	],
 	"helmv3": {
 		"automerge": false
@@ -15,8 +15,9 @@
 	"helm-values": {
 		"automerge": false
 	},
-	"regexManagers": [
+	"customManagers": [
 		{
+			"customType": "regex",
 			"fileMatch": [
 				"(^|/)Chart\\.yaml$"
 			],
@@ -32,11 +33,15 @@
 			"matchManagers": [
 				"helmv3",
 				"helm-values",
-				"regex"
+				"custom.regex"
 			],
 			"bumpVersion": "patch",
 			"automerge": false,
-			"matchUpdateTypes": ["major", "minor", "patch"],
+			"matchUpdateTypes": [
+				"major",
+				"minor",
+				"patch"
+			],
 			"labels": [
 				"dependencies",
 				"helm"

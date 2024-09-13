@@ -1,6 +1,6 @@
 {
 	"extends": [
-		"config:base",
+		"config:recommended",
 		":rebaseStalePrs",
 		":timezone(Europe/London)"
 	],
@@ -40,7 +40,7 @@
 			"npm"
 		],
 		"extends": [
-			":unpublishSafe",
+			"npm:unpublishSafe",
 			"helpers:disableTypesNodeMajor"
 		],
 		"rangeStrategy": "bump",
@@ -62,12 +62,14 @@
 					"patch"
 				],
 				"automerge": true,
-				"stabilityDays": 3,
-				"excludePackageNames": ["tsoa"]
+				"minimumReleaseAge": "3 days",
+				"matchPackageNames": [
+					"!tsoa"
+				]
 			},
 			{
 				"description": "disable package.json > engines update",
-				"depTypeList": [
+				"matchDepTypes": [
 					"engines"
 				],
 				"enabled": false
@@ -85,12 +87,18 @@
 				"groupName": "eslint-plugin-prettier v5 and prettier v3 upgrade"
 			},
 			{
-				"packageNames": ["tsoa"],
-				"ignoreVersions": ["6.3.1"]
+				"matchPackageNames": [
+					"tsoa"
+				],
+				"ignoreVersions": [
+					"6.3.1"
+				]
 			},
 			{
 				"description": "Downgrade TypeScript to version 5.5.4",
-				"matchPackageNames": ["typescript"],
+				"matchPackageNames": [
+					"typescript"
+				],
 				"allowedVersions": "5.5.4",
 				"rangeStrategy": "pin"
 			}
@@ -102,9 +110,12 @@
 			"github-actions"
 		],
 		"groupName": "GitHub Actions - updates",
-		"packageRules":[
-			{ "matchUpdateTypes": ["major"],
-			  "matchPackageNames": [
+		"packageRules": [
+			{
+				"matchUpdateTypes": [
+					"major"
+				],
+				"matchPackageNames": [
 					"actions/checkout",
 					"actions/setup-node",
 					"actions/setup-python",
@@ -115,7 +126,7 @@
 				"extends": [
 					"schedule:automergeNonOfficeHours"
 				]
-				}
+			}
 		]
 	},
 	"packageRules": [
