@@ -11,7 +11,7 @@
   "homepage": "https://github.com/digicatapult/renovate-config",
   "license": "Apache-2.0",
 	"engines": {
-    "node": ">=18.13.0"
+    "node": ">= 20"
   },
 	"author": "Digital Catapult (https://www.digicatapult.org.uk/)",
   "scripts": {
