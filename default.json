@@ -73,6 +73,14 @@
 					"engines"
 				],
 				"enabled": false
+			},
+			{
+				"description": "Replace tsimp with @digicatapult/tsimp at version 2.0.12",
+				"matchPackageNames": [
+					"tsimp"
+				],
+				"replacementName": "@digicatapult/tsimp",
+				"replacementVersion": "2.0.12"
 			}
 		]
 	},
