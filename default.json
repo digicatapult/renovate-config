@@ -73,14 +73,6 @@
 					"engines"
 				],
 				"enabled": false
-			},
-			{
-				"description": "Downgrade TypeScript to version 5.5.4",
-				"matchPackageNames": [
-					"typescript"
-				],
-				"allowedVersions": "5.5.4",
-				"rangeStrategy": "pin"
 			}
 		]
 	},
