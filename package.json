@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/renovate-config",
-  "version": "0.3.374",
+  "version": "0.4.0",
   "description": "Renovate Preset for Digital Catapult",
   "files": [
     "default.json",
@@ -11,11 +11,11 @@
   "homepage": "https://github.com/digicatapult/renovate-config",
   "license": "Apache-2.0",
 	"engines": {
-    "node": ">=18.13.0"
+    "node": ">= 20"
   },
 	"author": "Digital Catapult (https://www.digicatapult.org.uk/)",
   "scripts": {
-    "test": "renovate-config-validator"
+    "test": "renovate-config-validator default.json helm.json poetry.json"
   },
   "devDependencies": {
     "renovate": "^38.77.3"
