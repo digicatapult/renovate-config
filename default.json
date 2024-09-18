@@ -47,6 +47,7 @@
 		"bumpVersion": "patch",
 		"automergeType": "pr",
 		"updateLockFiles": true,
+		"recreateWhen": "always",
 		"major": {
 			"automerge": false
 		},
