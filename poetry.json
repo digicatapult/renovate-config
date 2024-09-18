@@ -19,6 +19,7 @@
 		"updateLockFiles": true,
 		"rangeStrategy": "bump",
 		"bumpVersion": "patch",
+		"recreateWhen": "always",
 		"major": {
 			"automerge": false
 		},
