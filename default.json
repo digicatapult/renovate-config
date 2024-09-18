@@ -61,7 +61,7 @@
 					"minor",
 					"patch"
 				],
-				"automerge": false,
+				"automerge": true,
 				"minimumReleaseAge": "3 days",
 				"matchPackageNames": [
 					"!tsoa"
