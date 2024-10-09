@@ -128,7 +128,7 @@
 			  "digicatapult/bridgeAI*",
 			  "digicatapult/nice-fetch-ai-adapter"
 			],
-			"labels": ["non-production"]
+			"addLabels": ["non-production"]
 		  }
 	]
 }
