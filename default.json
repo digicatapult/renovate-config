@@ -121,6 +121,14 @@
 				"dependencies",
 				"docker"
 			]
-		}
+		},
+		{
+			"description": "Apply non-production labels to all non-production repos.",
+			"matchRepositories": [
+			  "digicatapult/bridgeAI*",
+			  "digicatapult/nice-fetch-ai-adapter"
+			],
+			"labels": ["non-production"]
+		  }
 	]
 }
