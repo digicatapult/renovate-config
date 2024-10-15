@@ -63,10 +63,7 @@
 					"patch"
 				],
 				"automerge": true,
-				"minimumReleaseAge": "3 days",
-				"matchPackageNames": [
-					"!tsoa"
-				]
+				"minimumReleaseAge": "3 days"
 			},
 			{
 				"description": "disable package.json > engines update",
