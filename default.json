@@ -26,7 +26,9 @@
 			"rebaseWhen": "behind-base-branch",
 			"branchTopic": "cargo-lock-maintenance",
 			"commitMessageAction": "Cargo lock file maintenance",
-			"schedule": ["after 12pm on sunday"],
+			"schedule": [
+				"after 12pm on sunday"
+			],
 			"prBodyDefinitions": {
 				"Change": "Cargo.lock refreshed"
 			}
@@ -98,7 +100,9 @@
 			"rebaseWhen": "behind-base-branch",
 			"branchTopic": "package-lock-maintenance",
 			"commitMessageAction": "package-lock file maintenance",
-			"schedule": ["after 12pm on sunday"],
+			"schedule": [
+				"after 12pm on sunday"
+			],
 			"prBodyDefinitions": {
 				"Change": "package-lock.json refreshed"
 			}
