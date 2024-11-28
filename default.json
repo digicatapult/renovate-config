@@ -20,6 +20,15 @@
 		"bumpVersion": "patch",
 		"automerge": false,
 		"updateLockFiles": true,
+		"lockFileMaintenance": {
+			"enabled": true,
+			"recreateWhen": "always",
+			"rebaseWhen": "behind-base-branch",
+			"branchTopic": "cargo-lock-maintenance",
+			"schedule": [
+				"after 12pm on sunday"
+			]
+		},
 		"packageRules": [
 			{
 				"description": "merge minor and patch updates into a single PR",
@@ -80,7 +89,16 @@
 				"replacementName": "@digicatapult/tsimp",
 				"replacementVersion": "2.0.12"
 			}
-		]
+		],
+		"lockFileMaintenance": {
+			"enabled": true,
+			"recreateWhen": "always",
+			"rebaseWhen": "behind-base-branch",
+			"branchTopic": "package-lock-maintenance",
+			"schedule": [
+				"after 12pm on sunday"
+			]
+		}
 	},
 	"github-actions": {
 		"labels": [
