@@ -25,13 +25,9 @@
 			"recreateWhen": "always",
 			"rebaseWhen": "behind-base-branch",
 			"branchTopic": "cargo-lock-maintenance",
-			"commitMessageAction": "Cargo lock file maintenance",
 			"schedule": [
 				"after 12pm on sunday"
-			],
-			"prBodyDefinitions": {
-				"Change": "Cargo.lock refreshed"
-			}
+			]
 		},
 		"packageRules": [
 			{
@@ -99,13 +95,9 @@
 			"recreateWhen": "always",
 			"rebaseWhen": "behind-base-branch",
 			"branchTopic": "package-lock-maintenance",
-			"commitMessageAction": "package-lock file maintenance",
 			"schedule": [
 				"after 12pm on sunday"
-			],
-			"prBodyDefinitions": {
-				"Change": "package-lock.json refreshed"
-			}
+			]
 		}
 	},
 	"github-actions": {
