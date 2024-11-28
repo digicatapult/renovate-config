@@ -1,131 +1,117 @@
 {
-	"extends": [
-		"config:recommended",
-		":rebaseStalePrs",
-		":timezone(Europe/London)"
-	],
-	"enabledManagers": [
-		"npm",
-		"dockerfile",
-		"docker-compose",
-		"github-actions",
-		"cargo"
-	],
-	"cargo": {
-		"labels": [
-			"dependencies",
-			"rust"
-		],
-		"rangeStrategy": "bump",
-		"bumpVersion": "patch",
-		"automerge": false,
-		"updateLockFiles": true,
-		"packageRules": [
-			{
-				"description": "merge minor and patch updates into a single PR",
-				"groupName": "rust - all minor and patch updates",
-				"extends": [
-					"schedule:automergeNonOfficeHours"
-				],
-				"matchUpdateTypes": [
-					"minor",
-					"patch"
-				]
-			}
-		]
-	},
-	"npm": {
-		"labels": [
-			"dependencies",
-			"npm"
-		],
-		"extends": [
-			"npm:unpublishSafe",
-			"helpers:disableTypesNodeMajor"
-		],
-		"rangeStrategy": "bump",
-		"bumpVersion": "patch",
-		"automergeType": "pr",
-		"updateLockFiles": true,
-		"recreateWhen": "always",
-		"major": {
-			"automerge": false
-		},
-		"packageRules": [
-			{
-				"description": "merge minor and patch updates into a single PR",
-				"groupName": "npm - all minor and patch updates",
-				"extends": [
-					"schedule:automergeNonOfficeHours"
-				],
-				"matchUpdateTypes": [
-					"minor",
-					"patch"
-				],
-				"automerge": true,
-				"minimumReleaseAge": "3 days"
-			},
-			{
-				"description": "disable package.json > engines update",
-				"matchDepTypes": [
-					"engines"
-				],
-				"enabled": false
-			},
-			{
-				"description": "Replace tsimp with @digicatapult/tsimp at version 2.0.12",
-				"matchPackageNames": [
-					"tsimp"
-				],
-				"replacementName": "@digicatapult/tsimp",
-				"replacementVersion": "2.0.12"
-			}
-		]
-	},
-	"github-actions": {
-		"labels": [
-			"dependencies",
-			"github-actions"
-		],
-		"groupName": "GitHub Actions - updates",
-		"packageRules": [
-			{
-				"matchUpdateTypes": [
-					"major"
-				],
-				"matchPackageNames": [
-					"actions/checkout",
-					"actions/setup-node",
-					"actions/setup-python",
-					"actions/cache"
-				],
-				"automerge": true,
-				"groupName": "Github-Actions - trusted major updates",
-				"extends": [
-					"schedule:automergeNonOfficeHours"
-				]
-			}
-		]
-	},
-	"packageRules": [
-		{
-			"matchManagers": [
-				"dockerfile",
-				"docker-compose"
-			],
-			"groupName": "Docker - updates",
-			"labels": [
-				"dependencies",
-				"docker"
-			]
-		},
-		{
-			"description": "Apply non-production labels to all non-production repos.",
-			"matchRepositories": [
-			  "digicatapult/bridgeAI*",
-			  "digicatapult/nice-fetch-ai-adapter"
-			],
-			"addLabels": ["non-production"]
-		  }
-	]
+  "extends": [
+    "config:recommended",
+    ":rebaseStalePrs",
+    ":timezone(Europe/London)"
+  ],
+  "enabledManagers": [
+    "npm",
+    "dockerfile",
+    "docker-compose",
+    "github-actions",
+    "cargo"
+  ],
+  "cargo": {
+    "labels": ["dependencies", "rust"],
+    "rangeStrategy": "bump",
+    "bumpVersion": "patch",
+    "automerge": false,
+    "updateLockFiles": true,
+    "lockFileMaintenance": {
+      "enabled": true,
+      "recreateWhen": "always",
+      "rebaseWhen": "behind-base-branch",
+      "branchTopic": "cargo-lock-maintenance",
+      "commitMessageAction": "Cargo lock file maintenance",
+      "schedule": ["after 12pm on sunday"],
+      "prBodyDefinitions": {
+        "Change": "Cargo.lock refreshed"
+      }
+    },
+    "packageRules": [
+      {
+        "description": "merge minor and patch updates into a single PR",
+        "groupName": "rust - all minor and patch updates",
+        "extends": ["schedule:automergeNonOfficeHours"],
+        "matchUpdateTypes": ["minor", "patch"]
+      }
+    ]
+  },
+  "npm": {
+    "labels": ["dependencies", "npm"],
+    "extends": ["npm:unpublishSafe", "helpers:disableTypesNodeMajor"],
+    "rangeStrategy": "bump",
+    "bumpVersion": "patch",
+    "automergeType": "pr",
+    "updateLockFiles": true,
+    "recreateWhen": "always",
+    "major": {
+      "automerge": false
+    },
+    "packageRules": [
+      {
+        "description": "merge minor and patch updates into a single PR",
+        "groupName": "npm - all minor and patch updates",
+        "extends": ["schedule:automergeNonOfficeHours"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "automerge": true,
+        "minimumReleaseAge": "3 days"
+      },
+      {
+        "description": "disable package.json > engines update",
+        "matchDepTypes": ["engines"],
+        "enabled": false
+      },
+      {
+        "description": "Replace tsimp with @digicatapult/tsimp at version 2.0.12",
+        "matchPackageNames": ["tsimp"],
+        "replacementName": "@digicatapult/tsimp",
+        "replacementVersion": "2.0.12"
+      }
+    ],
+    "lockFileMaintenance": {
+      "enabled": true,
+      "recreateWhen": "always",
+      "rebaseWhen": "behind-base-branch",
+      "branchTopic": "package-lock-maintenance",
+      "commitMessageAction": "package-lock file maintenance",
+      "schedule": ["after 12pm on sunday"],
+      "prBodyDefinitions": {
+        "Change": "package-lock.json refreshed"
+      }
+    }
+  },
+  "github-actions": {
+    "labels": ["dependencies", "github-actions"],
+    "groupName": "GitHub Actions - updates",
+    "packageRules": [
+      {
+        "matchUpdateTypes": ["major"],
+        "matchPackageNames": [
+          "actions/checkout",
+          "actions/setup-node",
+          "actions/setup-python",
+          "actions/cache"
+        ],
+        "automerge": true,
+        "groupName": "Github-Actions - trusted major updates",
+        "extends": ["schedule:automergeNonOfficeHours"]
+      }
+    ]
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "groupName": "Docker - updates",
+      "labels": ["dependencies", "docker"]
+    },
+    {
+      "description": "Apply non-production labels to all non-production repos.",
+      "matchRepositories": [
+        "digicatapult/bridgeAI*",
+        "digicatapult/nice-fetch-ai-adapter"
+      ],
+      "addLabels": ["non-production"]
+    }
+  ]
 }
