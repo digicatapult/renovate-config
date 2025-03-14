@@ -5,7 +5,8 @@
   "files": [
     "default.json",
     "helm.json",
-    "poetry.json"
+    "poetry.json",
+    "nuget.json"
   ],
   "repository": "git://github.com/digicatapult/renovate-config",
   "homepage": "https://github.com/digicatapult/renovate-config",
@@ -15,7 +16,7 @@
   },
   "author": "Digital Catapult (https://www.digicatapult.org.uk/)",
   "scripts": {
-    "test": "renovate-config-validator default.json helm.json poetry.json"
+    "test": "renovate-config-validator default.json helm.json poetry.json nuget.json"
   },
   "devDependencies": {
     "renovate": "^39.194.0"
