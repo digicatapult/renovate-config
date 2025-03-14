@@ -4,11 +4,6 @@
 		"github>digicatapult/renovate-config"
 	],
 	"enabledManagers": [
-		"npm",
-		"dockerfile",
-		"docker-compose",
-		"github-actions",
-		"cargo",
 		"nuget"
 	],
 	"nuget": {
@@ -36,14 +31,6 @@
                 ],
                 "automerge": true,
                 "minimumReleaseAge": "3 days"
-            },
-            {
-                "matchDatasources": [
-                    "nuget"
-                ],
-                "registryUrls" :[
-                    "https://api.nuget.org/v3/index.json"
-                ]
             }
 		]
 	}
