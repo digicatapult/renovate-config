@@ -37,7 +37,7 @@
                 "automerge": true,
                 "minimumReleaseAge": "3 days"
             },
-			{
+            {
                 "matchDatasources": [
                     "nuget"
                 ],
