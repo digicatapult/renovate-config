@@ -11,7 +11,6 @@
             "dependencies",
             "nuget"
         ],
-        "updateLockFiles": true,
         "rangeStrategy": "bump",
         "bumpVersion": "patch",
         "recreateWhen": "always",
