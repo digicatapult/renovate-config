@@ -16,6 +16,7 @@
 			"dependencies",
 			"poetry"
 		],
+		"updateLockFiles": true,
 		"rangeStrategy": "bump",
 		"bumpVersion": "patch",
 		"recreateWhen": "always",
