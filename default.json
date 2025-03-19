@@ -9,7 +9,8 @@
 		"dockerfile",
 		"docker-compose",
 		"github-actions",
-		"cargo"
+		"cargo",
+		"nuget"
 	],
 	"cargo": {
 		"labels": [
