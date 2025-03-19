@@ -100,6 +100,33 @@
 			]
 		}
 	},
+	"nuget": {
+        "labels": [
+            "dependencies",
+            "nuget"
+        ],
+        "rangeStrategy": "bump",
+        "bumpVersion": "patch",
+        "recreateWhen": "always",
+        "major": {
+            "automerge": false
+        },
+        "packageRules": [
+            {
+                "description": "merge minor and patch updates into a single PR",
+                "groupName": "nuget - all minor and patch updates",
+                "extends": [
+                    "schedule:automergeNonOfficeHours"
+                ],
+                "matchUpdateTypes": [
+                    "minor",
+                    "patch"
+                ],
+                "automerge": true,
+                "minimumReleaseAge": "3 days"
+            }
+        ]
+    },
 	"github-actions": {
 		"labels": [
 			"dependencies",
