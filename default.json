@@ -73,7 +73,10 @@
 					"patch"
 				],
 				"automerge": true,
-				"minimumReleaseAge": "3 days"
+				"minimumReleaseAge": "3 days",
+				"addLabels": [
+					"automerge"
+				]
 			},
 			{
 				"description": "disable package.json > engines update",
@@ -124,7 +127,10 @@
                     "patch"
                 ],
                 "automerge": true,
-                "minimumReleaseAge": "3 days"
+                "minimumReleaseAge": "3 days",
+				"addLabels": [
+					"automerge"
+				]
             }
         ]
     },
@@ -149,6 +155,9 @@
 				"groupName": "Github-Actions - trusted major updates",
 				"extends": [
 					"schedule:automergeNonOfficeHours"
+				],
+				"addLabels": [
+					"automerge"
 				]
 			}
 		]
