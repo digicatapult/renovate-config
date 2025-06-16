@@ -28,7 +28,10 @@
 			"branchTopic": "cargo-lock-maintenance",
 			"schedule": [
 				"after 12pm on sunday"
-			]
+			],
+			"addLabels": [
+					"lock-files"
+				]
 		},
 		"packageRules": [
 			{
