@@ -1,0 +1,65 @@
+{
+    "enableManagers": [
+        "flux",
+        "github-actions"
+    ],
+    "baseBranches": [
+        "main"
+    ],
+    "extends": [
+        ":timezone(Europe/London)"
+    ],
+    "onboarding": false,
+    "requireConfig": false,
+    "prHourlyLimit": 20,
+    "prConcurrentLimit": 20,
+    "recreateWhen": "always",
+    "flux": {
+        "labels": [
+            "dependencies",
+            "flux"
+        ],
+        "fileMatch": [
+            "clusters/kind-cluster/.*\\.ya?ml$"
+        ],
+        "packageRules": [
+            {
+                "matchManagers": [
+                    "flux"
+                ],
+                "pinDigests": false
+            },
+            {
+                "schedule": [
+                    "0 9-17 * * *"
+                ]
+            }
+        ]
+    },
+    "github-actions": {
+        "labels": [
+            "dependencies",
+            "github-actions"
+        ],
+        "groupName": "GitHub Actions - updates",
+        "packageRules": [
+            {
+                "matchUpdateTypes": [
+                    "major"
+                ],
+                "matchPackageNames": [
+                    "actions/checkout",
+                    "actions/cache"
+                ],
+                "automerge": true,
+                "groupName": "Github-Actions - trusted major updates",
+                "extends": [
+                    "schedule:automergeNonOfficeHours"
+                ],
+                "addLabels": [
+                    "automerge"
+                ]
+            }
+        ]
+    }
+}
