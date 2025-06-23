@@ -22,9 +22,6 @@
         "fileMatch": [
             "clusters/kind-cluster/.*\\.ya?ml$"
         ],
-        "ignorePaths": [
-            "clusters/veritable-prod"
-        ],
         "packageRules": [
             {
                 "matchManagers": [
