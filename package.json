@@ -1,11 +1,12 @@
 {
   "name": "@digicatapult/renovate-config",
-  "version": "0.6.76",
+  "version": "0.7.1",
   "description": "Renovate Preset for Digital Catapult",
   "files": [
     "default.json",
     "helm.json",
-    "poetry.json"
+    "poetry.json",
+    "flux.json"
   ],
   "repository": "git://github.com/digicatapult/renovate-config",
   "homepage": "https://github.com/digicatapult/renovate-config",
