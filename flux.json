@@ -20,7 +20,7 @@
             "flux"
         ],
         "fileMatch": [
-            "clusters/kind-cluster/.*\\.ya?ml$"
+            ".*\\.ya?ml$"
         ],
         "packageRules": [
             {
@@ -30,9 +30,42 @@
                 "pinDigests": false
             },
             {
+                "matchManagers": [
+                    "flux"
+                ],
                 "schedule": [
                     "0 9-17 * * *"
                 ]
+            },
+            {
+                "matchPaths": [
+                    "^clusters/kind-cluster/.*\\.ya?ml$"
+                ],
+                "matchManagers": [
+                    "flux"
+                ],
+                "automerge": true,
+                "addLabels": [
+                    "automerge"
+                ],
+                "separateMinorPatch": true,
+                "separateMajor": true,
+                "separateMultipleMajor": true
+            },
+            {
+                "matchPaths": [
+                    "^(?!clusters/kind-cluster/).*\\.ya?ml$"
+                ],
+                "matchManagers": [
+                    "flux"
+                ],
+                "automerge": false,
+                "addLabels": [
+                    "production"
+                ],
+                "separateMinorPatch": true,
+                "separateMajor": true,
+                "separateMultipleMajor": true
             }
         ]
     },
