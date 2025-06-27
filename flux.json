@@ -11,87 +11,81 @@
     "prConcurrentLimit": 20,
     "recreateWhen": "always",
     "flux": {
-        "labels": [
-            "dependencies",
-            "flux"
-        ],
-        "fileMatch": [
+        "managerFilePatterns": [
             "^clusters/.*\\.ya?ml$"
-        ],
-        "packageRules": [
-            {
-                "matchManagers": [
-                    "flux"
-                ],
-                "pinDigests": false
-            },
-            {
-                "matchManagers": [
-                    "flux"
-                ],
-                "schedule": [
-                    "* 9,10,11,12,13,14,15,16,17 * * *"
-                ]
-            },
-            {
-                "matchManagers": [
-                    "flux"
-                ],
-                "matchPaths": [
-                    "^clusters/kind-cluster/.*\\.ya?ml$"
-                ],
-                "automerge": true,
-                "addLabels": [
-                    "automerge",
-                    "kind"
-                ],
-                "separateMajorMinor": true,
-                "separateMultipleMajor": true,
-                "separateMinorPatch": true,
-                "groupName": "flux - kind-cluster"
-            },
-            {
-                "matchManagers": [
-                    "flux"
-                ],
-                "matchPaths": [
-                    "^clusters/(?!kind-cluster/)[^/]+/.*\\.ya?ml$"
-                ],
-                "automerge": false,
-                "addLabels": [
-                    "production"
-                ],
-                "separateMajorMinor": true,
-                "separateMultipleMajor": true,
-                "separateMinorPatch": true,
-                "groupName": "flux - non-kind-cluster"
-            }
         ]
     },
-    "github-actions": {
-        "labels": [
-            "dependencies",
-            "github-actions"
-        ],
-        "groupName": "GitHub Actions - updates",
-        "packageRules": [
-            {
-                "matchUpdateTypes": [
-                    "major"
-                ],
-                "matchPackageNames": [
-                    "actions/checkout",
-                    "actions/cache"
-                ],
-                "automerge": true,
-                "groupName": "github-actions - trusted major updates",
-                "extends": [
-                    "schedule:automergeNonOfficeHours"
-                ],
-                "addLabels": [
-                    "automerge"
-                ]
-            }
-        ]
-    }
+    "packageRules": [
+        {
+            "matchManagers": [
+                "flux"
+            ],
+            "pinDigests": false
+        },
+        {
+            "matchManagers": [
+                "flux"
+            ],
+            "schedule": [
+                "* 9,10,11,12,13,14,15,16,17 * * *"
+            ]
+        },
+        {
+            "matchManagers": [
+                "flux"
+            ],
+            "matchPaths": [
+                "^clusters/kind-cluster/.*\\.ya?ml$"
+            ],
+            "automerge": true,
+            "addLabels": [
+                "automerge",
+                "kind"
+            ],
+            "separateMajorMinor": true,
+            "separateMultipleMajor": true,
+            "separateMinorPatch": true,
+            "groupName": "flux - kind-cluster"
+        },
+        {
+            "matchManagers": [
+                "flux"
+            ],
+            "matchPaths": [
+                "^clusters/(?!kind-cluster/)[^/]+/.*\\.ya?ml$"
+            ],
+            "automerge": false,
+            "addLabels": [
+                "production"
+            ],
+            "separateMajorMinor": true,
+            "separateMultipleMajor": true,
+            "separateMinorPatch": true,
+            "groupName": "flux - non-kind-cluster"
+        },
+        {
+            "matchManagers": [
+                "github-actions"
+            ],
+            "labels": [
+                "dependencies",
+                "github-actions"
+            ],
+            "groupName": "GitHub Actions - updates",
+            "matchUpdateTypes": [
+                "major"
+            ],
+            "matchPackageNames": [
+                "actions/checkout",
+                "actions/cache"
+            ],
+            "automerge": true,
+            "extends": [
+                "schedule:automergeNonOfficeHours"
+            ],
+            "addLabels": [
+                "automerge"
+            ]
+        }
+    ]
 }
