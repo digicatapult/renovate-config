@@ -1,8 +1,4 @@
 {
-    "enableManagers": [
-        "flux",
-        "github-actions"
-    ],
     "baseBranches": [
         "main"
     ],
@@ -10,7 +6,7 @@
         ":timezone(Europe/London)"
     ],
     "onboarding": false,
-    "requireConfig": false,
+    "requireConfig": "optional",
     "prHourlyLimit": 20,
     "prConcurrentLimit": 20,
     "recreateWhen": "always",
@@ -19,8 +15,8 @@
             "dependencies",
             "flux"
         ],
-        "fileMatch": [
-            "^clusters/.*\\.ya?ml$"
+        "managerFilePatterns": [
+            "/^clusters/.*\\.ya?ml$/"
         ],
         "packageRules": [
             {
@@ -34,14 +30,14 @@
                     "flux"
                 ],
                 "schedule": [
-                    "0 9-17 * * *"
+                    "* 9,10,11,12,13,14,15,16,17 * * *"
                 ]
             },
             {
                 "matchManagers": [
                     "flux"
                 ],
-                "matchPaths": [
+                "matchFileNames": [
                     "^clusters/kind-cluster/.*\\.ya?ml$"
                 ],
                 "automerge": true,
@@ -49,23 +45,21 @@
                     "automerge",
                     "kind"
                 ],
-                "separateMinorPatch": true,
-                "separateMajor": true,
+                "separateMajorMinor": true,
                 "separateMultipleMajor": true
             },
             {
                 "matchManagers": [
                     "flux"
                 ],
-                "matchPaths": [
+                "matchFileNames": [
                     "^(?!clusters/kind-cluster/).*\\.ya?ml$"
                 ],
                 "automerge": false,
                 "addLabels": [
                     "production"
                 ],
-                "separateMinorPatch": true,
-                "separateMajor": true,
+                "separateMajorMinor": true,
                 "separateMultipleMajor": true
             }
         ]
