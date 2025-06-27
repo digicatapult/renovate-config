@@ -6,7 +6,7 @@
         ":timezone(Europe/London)"
     ],
     "onboarding": false,
-    "requireConfig": "optional",
+    "requireConfig": false,
     "prHourlyLimit": 20,
     "prConcurrentLimit": 20,
     "recreateWhen": "always",
@@ -15,8 +15,8 @@
             "dependencies",
             "flux"
         ],
-        "managerFilePatterns": [
-            "/^clusters/.*\\.ya?ml$/"
+        "fileMatch": [
+            "^clusters/.*\\.ya?ml$"
         ],
         "packageRules": [
             {
@@ -37,7 +37,7 @@
                 "matchManagers": [
                     "flux"
                 ],
-                "matchFileNames": [
+                "matchPaths": [
                     "^clusters/kind-cluster/.*\\.ya?ml$"
                 ],
                 "automerge": true,
@@ -46,21 +46,25 @@
                     "kind"
                 ],
                 "separateMajorMinor": true,
-                "separateMultipleMajor": true
+                "separateMultipleMajor": true,
+                "separateMinorPatch": true,
+                "groupName": "flux - kind-cluster"
             },
             {
                 "matchManagers": [
                     "flux"
                 ],
-                "matchFileNames": [
-                    "^(?!clusters/kind-cluster/).*\\.ya?ml$"
+                "matchPaths": [
+                    "^clusters/(?!kind-cluster/)[^/]+/.*\\.ya?ml$"
                 ],
                 "automerge": false,
                 "addLabels": [
                     "production"
                 ],
                 "separateMajorMinor": true,
-                "separateMultipleMajor": true
+                "separateMultipleMajor": true,
+                "separateMinorPatch": true,
+                "groupName": "flux - non-kind-cluster"
             }
         ]
     },
@@ -80,7 +84,7 @@
                     "actions/cache"
                 ],
                 "automerge": true,
-                "groupName": "Github-Actions - trusted major updates",
+                "groupName": "github-actions - trusted major updates",
                 "extends": [
                     "schedule:automergeNonOfficeHours"
                 ],
