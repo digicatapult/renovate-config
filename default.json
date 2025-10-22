@@ -97,6 +97,9 @@
 				"replacementVersion": "2.0.12"
 			}
 		],
+		"postUpdateOptions": [
+			"npmInstallTwice"
+		],
 		"lockFileMaintenance": {
 			"enabled": true,
 			"recreateWhen": "always",
