@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/renovate-config",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Renovate Preset for Digital Catapult",
   "files": [
     "default.json",
@@ -20,6 +20,6 @@
     "test": "renovate-config-validator default.json helm.json poetry.json flux.json"
   },
   "devDependencies": {
-    "renovate": "^41.168.1"
+    "renovate": "^41.168.5"
   }
 }
