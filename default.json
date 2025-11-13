@@ -149,16 +149,19 @@
 		"packageRules": [
 			{
 				"matchUpdateTypes": [
-					"major"
+					"major",
+					"minor",
+					"patch"
 				],
 				"matchPackageNames": [
 					"actions/checkout",
 					"actions/setup-node",
 					"actions/setup-python",
-					"actions/cache"
+					"actions/cache",
+					"trufflesecurity/trufflehog"
 				],
 				"automerge": true,
-				"groupName": "Github-Actions - trusted major updates",
+				"groupName": "Github-Actions - trusted updates",
 				"extends": [
 					"schedule:automergeNonOfficeHours"
 				],
