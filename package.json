@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/renovate-config",
-  "version": "0.9.5",
+  "version": "0.10.0",
   "description": "Renovate Preset for Digital Catapult",
   "files": [
     "default.json",
@@ -12,8 +12,8 @@
   "homepage": "https://github.com/digicatapult/renovate-config",
   "license": "Apache-2.0",
   "engines": {
-    "node": "^22.x.x",
-    "npm": "^10.x.x"
+    "node": "24.x",
+    "npm": "11.x"
   },
   "author": "Digital Catapult (https://www.digicatapult.org.uk/)",
   "scripts": {
