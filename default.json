@@ -187,7 +187,8 @@
 			"description": "Apply non-production labels to all non-production repos.",
 			"matchRepositories": [
 			  "digicatapult/bridgeAI*",
-			  "digicatapult/nice-fetch-ai-adapter"
+			  "digicatapult/nice-fetch-ai-adapter",
+			  "digicatapult/sqnc*"
 			],
 			"addLabels": ["non-production"]
 		  }
