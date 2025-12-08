@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/renovate-config",
-  "version": "0.10.16",
+  "version": "0.10.17",
   "description": "Renovate Preset for Digital Catapult",
   "files": [
     "default.json",
