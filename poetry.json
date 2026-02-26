@@ -41,6 +41,16 @@
 					"python"
 				],
 				"enabled": false
+			},
+			{
+				"description": "disable redis updates for spec-rag-worker",
+				"matchRepositories": [
+					"digicatapult/spec-rag-worker"
+				],
+				"matchPackageNames": [
+					"redis"
+				],
+				"enabled": false
 			}
 		]
 	}
