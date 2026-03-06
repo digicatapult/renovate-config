@@ -34,7 +34,11 @@
 					"minor",
 					"patch"
 				],
-				"minimumReleaseAge": "3 days"
+				"automerge": true,
+				"minimumReleaseAge": "3 days",
+				"addLabels": [
+					"automerge"
+				]
 			},
 			{
 				"matchPackageNames": [
