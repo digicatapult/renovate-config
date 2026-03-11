@@ -189,7 +189,8 @@
 			  "digicatapult/bridgeAI*",
 			  "digicatapult/nice-fetch-ai-adapter",
 			  "digicatapult/sqnc*",
-			  "digicatapult/ds-demos-zk*"
+			  "digicatapult/ds-demos-zk*",
+			  "digicatapult/QTAP"
 			],
 			"addLabels": ["non-production"]
 		  }
