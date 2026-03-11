@@ -188,7 +188,8 @@
 			"matchRepositories": [
 			  "digicatapult/bridgeAI*",
 			  "digicatapult/nice-fetch-ai-adapter",
-			  "digicatapult/sqnc*"
+			  "digicatapult/sqnc*",
+			  "digicatapult/ds-demos-zk*"
 			],
 			"addLabels": ["non-production"]
 		  }
