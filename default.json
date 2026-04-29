@@ -100,6 +100,14 @@
 				"description": "disable all Axios package updates until further notice",
 				"matchPackageNames": ["axios**"],
 				"enabled": false
+			},
+			{
+				"description": "group eslint and @eslint/js updates together",
+				"groupName": "eslint",
+				"matchPackageNames": [
+					"eslint",
+					"@eslint/js"
+				]
 			}
 		],
 		"postUpdateOptions": [
