@@ -1,4 +1,4 @@
-# GitHub CODEOWNERS file
+# Github CODEOWNERS file
 
-# Global code-owners for this repository
-* @digicatapult/software-engineering
+# Default code-owners for this repository
+*       @mattdean-digicatapult @dblane-digicatapult @jonmattgray

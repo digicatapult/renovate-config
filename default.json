@@ -102,12 +102,10 @@
 				"enabled": false
 			},
 			{
-				"description": "group eslint and @eslint/js updates together",
+				"description": "group all eslint-related updates into one PR",
+				"extends": ["packages:eslint"],
 				"groupName": "eslint",
-				"matchPackageNames": [
-					"eslint",
-					"@eslint/js"
-				]
+				"matchUpdateTypes": ["major"]
 			}
 		],
 		"postUpdateOptions": [
