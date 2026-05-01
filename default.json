@@ -100,6 +100,12 @@
 				"description": "disable all Axios package updates until further notice",
 				"matchPackageNames": ["axios**"],
 				"enabled": false
+			},
+			{
+				"description": "group all eslint-related updates into one PR",
+				"extends": ["packages:eslint"],
+				"groupName": "eslint",
+				"matchUpdateTypes": ["major"]
 			}
 		],
 		"postUpdateOptions": [
