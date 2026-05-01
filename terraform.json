@@ -1,0 +1,225 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"github>digicatapult/renovate-config"
+	],
+	"enabledManagers": [
+		"terraform",
+		"terragrunt",
+		"terraform-version",
+		"terragrunt-version",
+		"github-actions"
+	],
+	"prHourlyLimit": 2,
+	"prConcurrentLimit": 5,
+	"terraform": {
+		"rangeStrategy": "bump"
+	},
+	"terragrunt": {
+		"rangeStrategy": "bump",
+		"lockFileMaintenance": {
+			"enabled": true,
+			"recreateWhen": "always",
+			"rebaseWhen": "behind-base-branch",
+			"branchTopic": "terraform-lock-maintenance",
+			"schedule": [
+				"after 12pm on sunday"
+			],
+			"addLabels": [
+				"dependencies",
+				"terraform",
+				"lock-files"
+			]
+		}
+	},
+	"packageRules": [
+		{
+			"description": "Group Terraform provider minor and patch updates into a single PR",
+			"matchManagers": [
+				"terraform"
+			],
+			"matchDepTypes": [
+				"provider",
+				"required_provider"
+			],
+			"matchUpdateTypes": [
+				"minor",
+				"patch"
+			],
+			"groupName": "terraform providers - minor and patch updates",
+			"labels": [
+				"dependencies",
+				"terraform"
+			],
+			"schedule": [
+				"* 9-17 * * 1-5"
+			],
+			"automerge": false,
+			"minimumReleaseAge": "3 days"
+		},
+		{
+			"description": "Terraform provider major updates - separate PR, never automerged",
+			"matchManagers": [
+				"terraform"
+			],
+			"matchDepTypes": [
+				"provider",
+				"required_provider"
+			],
+			"matchUpdateTypes": [
+				"major"
+			],
+			"labels": [
+				"dependencies",
+				"terraform",
+				"major-update"
+			],
+			"schedule": [
+				"* 9-17 * * 1-5"
+			],
+			"automerge": false
+		},
+		{
+			"description": "Group Terraform module (registry/local) minor and patch updates from .tf files",
+			"matchManagers": [
+				"terraform"
+			],
+			"matchDepTypes": [
+				"module"
+			],
+			"matchUpdateTypes": [
+				"minor",
+				"patch"
+			],
+			"groupName": "terraform modules - minor and patch updates",
+			"labels": [
+				"dependencies",
+				"terraform"
+			],
+			"schedule": [
+				"* 9-17 * * 1-5"
+			],
+			"automerge": false,
+			"minimumReleaseAge": "3 days"
+		},
+		{
+			"description": "Terraform module major updates from .tf files - separate PR, never automerged",
+			"matchManagers": [
+				"terraform"
+			],
+			"matchDepTypes": [
+				"module"
+			],
+			"matchUpdateTypes": [
+				"major"
+			],
+			"labels": [
+				"dependencies",
+				"terraform",
+				"major-update"
+			],
+			"schedule": [
+				"* 9-17 * * 1-5"
+			],
+			"automerge": false
+		},
+		{
+			"description": "Group Terragrunt module sources (registry/GitHub/Git) minor and patch updates",
+			"matchManagers": [
+				"terragrunt"
+			],
+			"matchDepTypes": [
+				"terragrunt",
+				"github",
+				"gitTags"
+			],
+			"matchUpdateTypes": [
+				"minor",
+				"patch"
+			],
+			"groupName": "terragrunt modules - minor and patch updates",
+			"labels": [
+				"dependencies",
+				"terragrunt"
+			],
+			"schedule": [
+				"* 9-17 * * 1-5"
+			],
+			"automerge": false,
+			"minimumReleaseAge": "3 days"
+		},
+		{
+			"description": "Terragrunt module sources major updates - separate PR, never automerged",
+			"matchManagers": [
+				"terragrunt"
+			],
+			"matchDepTypes": [
+				"terragrunt",
+				"github",
+				"gitTags"
+			],
+			"matchUpdateTypes": [
+				"major"
+			],
+			"labels": [
+				"dependencies",
+				"terragrunt",
+				"major-update"
+			],
+			"schedule": [
+				"* 9-17 * * 1-5"
+			],
+			"automerge": false
+		},
+		{
+			"description": "Terraform required_version constraints in .tf files",
+			"matchManagers": [
+				"terraform"
+			],
+			"matchDepTypes": [
+				"required_version"
+			],
+			"labels": [
+				"dependencies",
+				"terraform",
+				"tooling"
+			],
+			"schedule": [
+				"* 9-17 * * 1-5"
+			],
+			"automerge": false
+		},
+		{
+			"description": "Terraform CLI version pinned in .terraform-version",
+			"matchManagers": [
+				"terraform-version"
+			],
+			"groupName": "terraform CLI",
+			"labels": [
+				"dependencies",
+				"terraform",
+				"tooling"
+			],
+			"schedule": [
+				"* 9-17 * * 1-5"
+			],
+			"automerge": false
+		},
+		{
+			"description": "Terragrunt CLI version pinned in .terragrunt-version",
+			"matchManagers": [
+				"terragrunt-version"
+			],
+			"groupName": "terragrunt CLI",
+			"labels": [
+				"dependencies",
+				"terragrunt",
+				"tooling"
+			],
+			"schedule": [
+				"* 9-17 * * 1-5"
+			],
+			"automerge": false
+		}
+	]
+}
