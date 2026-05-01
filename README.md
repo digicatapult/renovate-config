@@ -40,6 +40,50 @@ Add this into your application repositories `renovate.json`:
 }
 ```
 
+#### Terraform / Terragrunt repositories
+
+For repositories containing Terraform or Terragrunt infrastructure code (e.g. `*-tf-infra`, `*-terragrunt-infra`), use the `terraform` preset instead:
+
+```json
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["github>digicatapult/renovate-config:terraform"]
+}
+```
+
+This preset enables managers for:
+
+- `.tf` files — Terraform providers, registry modules, and `required_version` constraints
+- `terragrunt.hcl` files — Terragrunt module sources
+- `.terraform-version` and `.terragrunt-version` — CLI version pinning (asdf/tfenv style)
+- GitHub Actions workflows (inherited from the default preset)
+
+Behaviour:
+
+- **No automerge** for any Terraform-related update — every change requires a human review of the resulting `terraform plan`.
+- **Grouped PRs** — minor and patch updates for providers / modules are batched into a single PR per ecosystem to reduce noise; major updates get their own PR labeled `major-update`.
+- **Business hours only** — PRs are opened Monday–Friday, 09:00–17:00 (Europe/London) so reviewers are available.
+- **Rate limited** — at most 2 new PRs per hour and 5 concurrent open PRs.
+- **3-day stability wait** for grouped minor/patch updates to avoid pulling in immediately-yanked releases.
+
+#### Flux repositories
+
+```json
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["github>digicatapult/renovate-config:flux"]
+}
+```
+
+#### Helm chart repositories
+
+```json
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["github>digicatapult/renovate-config:helm"]
+}
+```
+
 ## Links
 
 - [Configuration Options](https://renovatebot.com/docs/configuration-options)
