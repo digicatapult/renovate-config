@@ -20,6 +20,6 @@
     "test": "renovate-config-validator default.json helm.json poetry.json flux.json"
   },
   "devDependencies": {
-    "renovate": "^43.214.2"
+    "renovate": "^43.218.0"
   }
 }
