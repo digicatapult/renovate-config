@@ -1,4 +1,3 @@
-
 name: Validate Renovate config
 
 on:
@@ -8,7 +7,6 @@ on:
 
 jobs:
   test:
-
     name: Validate Renovate config
     runs-on: ubuntu-latest
 
@@ -23,3 +21,8 @@ jobs:
       run:  npm ci
     - name: Validate Renovate config
       run: npm test
+
+  scan-secrets:
+    uses: digicatapult/shared-workflows/.github/workflows/scan-secrets.yml@main
+    permissions:
+      contents: read
