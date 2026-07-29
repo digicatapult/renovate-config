@@ -45,6 +45,13 @@
 					"python"
 				],
 				"enabled": false
+			},
+			{
+				"description": "pin boto3 to prevent frequent releases being resolved by Poetry before passing minimum age",
+				"matchPackageNames": [
+					"boto3"
+				],
+				"rangeStrategy": "pin"
 			}
 		]
 	}
