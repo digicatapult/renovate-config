@@ -1,0 +1,35 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"description": [
+		"Overlay for repositories using a GitHub merge queue.",
+		"Unlike the language presets, this one deliberately does NOT extend the base preset, because it is orthogonal to language. Apply it AFTER a base preset so its overrides win, e.g. extends: ['github>digicatapult/renovate-config', 'github>digicatapult/renovate-config:merge-queue'] or ['github>digicatapult/renovate-config:poetry', 'github>digicatapult/renovate-config:merge-queue']."
+	],
+
+	"addLabels": ["v:patch"],
+
+	"platformAutomerge": true,
+
+	"rebaseWhen": "conflicted",
+
+	"npm": {
+		"bumpVersion": null,
+		"lockFileMaintenance": {
+			"rebaseWhen": "conflicted"
+		}
+	},
+
+	"cargo": {
+		"bumpVersion": null,
+		"lockFileMaintenance": {
+			"rebaseWhen": "conflicted"
+		}
+	},
+
+	"nuget": {
+		"bumpVersion": null
+	},
+
+	"poetry": {
+		"bumpVersion": null
+	}
+}

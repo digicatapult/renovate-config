@@ -17,7 +17,7 @@
   },
   "author": "Digital Catapult (https://www.digicatapult.org.uk/)",
   "scripts": {
-    "test": "renovate-config-validator default.json helm.json poetry.json flux.json"
+    "test": "renovate-config-validator default.json helm.json poetry.json flux.json merge-queue.json"
   },
   "devDependencies": {
     "renovate": "^43.285.7"

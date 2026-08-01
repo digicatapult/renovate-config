@@ -84,6 +84,47 @@ Behaviour:
 }
 ```
 
+#### Repositories using a GitHub merge queue
+
+Repositories on a merge queue need four changes to how Renovate behaves. Apply the `merge-queue` overlay **after** the base preset so its overrides win:
+
+```json
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"github>digicatapult/renovate-config",
+		"github>digicatapult/renovate-config:merge-queue"
+	]
+}
+```
+
+It composes with the language presets in the same way, base first:
+
+```json
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"github>digicatapult/renovate-config:poetry",
+		"github>digicatapult/renovate-config:merge-queue"
+	]
+}
+```
+
+Unlike the language presets, `merge-queue` deliberately does **not** extend the base preset itself. It is orthogonal to language, so it is an overlay rather than a variant.
+
+What it changes and why:
+
+| Setting | Base | Merge queue | Why |
+| --- | --- | --- | --- |
+| `bumpVersion` | `patch` | unset | Renovate writes the next version into the package file on its own branch. Two Renovate pull requests therefore compute the same version, and the second to reach the queue fails the version check and is evicted. Under merge queue versioning the number is applied on trunk after merge instead. |
+| `addLabels` | none | `v:patch` | Merge queue repositories gate pull requests on carrying exactly one `v:` label. Without this every Renovate pull request fails that gate and can never merge. |
+| `platformAutomerge` | Renovate default | `true` | Uses GitHub's own auto-merge, which routes the pull request **through the queue**. Merging via the Renovate API instead would either bypass the queue or be rejected by it. |
+| `rebaseWhen` | `behind-base-branch` (via `:rebaseStalePrs`) | `conflicted` | The queue tests each pull request against trunk itself, so rebasing merely to catch up is wasted CI. Worse, pushing to a branch that is sitting in the queue **evicts it**. Only rebase on a real conflict. |
+
+The `v:patch` label must exist in the repository.
+
+The branch protection settings listed under [Repository Setup](#repository-setup) also change for these repositories: "Require branches to be up to date before merging" is replaced by the queue and should be off, and `Check Version` is replaced by the version label check.
+
 ## Links
 
 - [Configuration Options](https://renovatebot.com/docs/configuration-options)
