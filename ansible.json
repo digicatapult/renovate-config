@@ -104,7 +104,7 @@
 				"/(^|/)molecule/.+/molecule\\.ya?ml$/"
 			],
 			"matchStrings": [
-				"#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)\\s*\\n\\s*image:\\s*[\"']?[^\"'\\n]+:(?<currentValue>[\\w.\\-]+)@(?<currentDigest>sha256:[a-f0-9]{64})[\"']?"
+				"#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)[^\\n]*\\n(?:[^\\S\\n]*#[^\\n]*\\n)*[^\\S\\n]*image:\\s*[\"']?[^\"'\\n]+:(?<currentValue>[\\w.\\-]+)@(?<currentDigest>sha256:[a-f0-9]{64})[\"']?"
 			],
 			"datasourceTemplate": "docker"
 		}

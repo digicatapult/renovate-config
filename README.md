@@ -101,8 +101,11 @@ Molecule images are usually built from a `MOLECULE_DISTRO` variable, so Renovate
 platforms:
   - name: instance
     # renovate: datasource=docker depName=geerlingguy/docker-ubuntu2204-ansible
+    # yamllint disable-line rule:line-length
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:latest@sha256:9ac7..."
 ```
+
+A digest is 71 characters on its own, so the image line will breach a 120-character `line-length` rule no matter how it is folded. The manager tolerates comment lines between the annotation and the image, so a `yamllint disable-line` can sit between them rather than the repo relaxing its lint config.
 
 The digest is not optional. The `geerlingguy/docker-*-ansible` images publish only a `latest` tag, so there is no version to track and a bare `:latest` gives a silently changing CI baseline. Pinning the digest makes the base reproducible and lets Renovate raise digest-update PRs. The custom manager requires the `@sha256:` suffix and will not match an image without it.
 
