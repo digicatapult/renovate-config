@@ -95,14 +95,16 @@ Behaviour:
 
 ##### Tracking Molecule platform images
 
-Molecule images are usually built from a `MOLECULE_DISTRO` variable, so Renovate cannot infer the package name. Annotate the image and give it a real tag instead of `latest`:
+Molecule images are usually built from a `MOLECULE_DISTRO` variable, so Renovate cannot infer the package name from the image string. Annotate it with the real package name, and pin a digest:
 
 ```yaml
 platforms:
   - name: instance
     # renovate: datasource=docker depName=geerlingguy/docker-ubuntu2204-ansible
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:3.0.2"
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:latest@sha256:9ac7..."
 ```
+
+The digest is not optional. The `geerlingguy/docker-*-ansible` images publish only a `latest` tag, so there is no version to track and a bare `:latest` gives a silently changing CI baseline. Pinning the digest makes the base reproducible and lets Renovate raise digest-update PRs. The custom manager requires the `@sha256:` suffix and will not match an image without it.
 
 #### Flux repositories
 

@@ -98,13 +98,13 @@
 	},
 	"customManagers": [
 		{
-			"description": "Molecule platform images annotated with a renovate comment",
+			"description": "Molecule platform images, pinned by digest and annotated with a renovate comment",
 			"customType": "regex",
 			"managerFilePatterns": [
 				"/(^|/)molecule/.+/molecule\\.ya?ml$/"
 			],
 			"matchStrings": [
-				"#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)\\s*\\n\\s*image:\\s*[\"']?[^\"'\\n]*:(?<currentValue>[\\w.\\-]+)[\"']?"
+				"#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)\\s*\\n\\s*image:\\s*[\"']?[^\"'\\n]+:(?<currentValue>[\\w.\\-]+)@(?<currentDigest>sha256:[a-f0-9]{64})[\"']?"
 			],
 			"datasourceTemplate": "docker"
 		}
