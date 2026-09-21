@@ -20,7 +20,6 @@
 		"rangeStrategy": "bump",
 		"bumpVersion": "patch",
 		"automerge": false,
-		"updateLockFiles": true,
 		"lockFileMaintenance": {
 			"enabled": true,
 			"recreateWhen": "always",
@@ -53,13 +52,12 @@
 			"npm"
 		],
 		"extends": [
-			"npm:unpublishSafe",
+			"security:minimumReleaseAgeNpm",
 			"helpers:disableTypesNodeMajor"
 		],
 		"rangeStrategy": "bump",
 		"bumpVersion": "patch",
 		"automergeType": "pr",
-		"updateLockFiles": true,
 		"recreateWhen": "always",
 		"major": {
 			"automerge": false
