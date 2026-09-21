@@ -1,0 +1,162 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"github>digicatapult/renovate-config"
+	],
+	"enabledManagers": [
+		"github-actions",
+		"pip_requirements",
+		"ansible-galaxy",
+		"ansible",
+		"dockerfile",
+		"docker-compose",
+		"custom.regex"
+	],
+	"prHourlyLimit": 2,
+	"prConcurrentLimit": 5,
+	"minimumReleaseAge": "3 days",
+	"pip_requirements": {
+		"labels": [
+			"dependencies",
+			"python"
+		],
+		"rangeStrategy": "bump",
+		"packageRules": [
+			{
+				"description": "merge minor and patch updates into a single PR",
+				"groupName": "ansible tooling - all minor and patch updates",
+				"extends": [
+					"schedule:automergeNonOfficeHours"
+				],
+				"matchPackageNames": [
+					"!ansible-core",
+					"!ansible"
+				],
+				"matchUpdateTypes": [
+					"minor",
+					"patch"
+				],
+				"automerge": true,
+				"addLabels": [
+					"automerge"
+				]
+			},
+			{
+				"description": "ansible-core patches are bug fixes only, so they stay in the automerged group",
+				"groupName": "ansible tooling - all minor and patch updates",
+				"extends": [
+					"schedule:automergeNonOfficeHours"
+				],
+				"matchPackageNames": [
+					"ansible-core",
+					"ansible"
+				],
+				"matchUpdateTypes": [
+					"patch"
+				],
+				"automerge": true,
+				"addLabels": [
+					"automerge"
+				]
+			},
+			{
+				"description": "ansible-core minors change module behaviour - always review by hand",
+				"matchPackageNames": [
+					"ansible-core",
+					"ansible"
+				],
+				"matchUpdateTypes": [
+					"major",
+					"minor"
+				],
+				"automerge": false
+			}
+		]
+	},
+	"ansible-galaxy": {
+		"labels": [
+			"dependencies",
+			"ansible"
+		],
+		"rangeStrategy": "bump",
+		"packageRules": [
+			{
+				"description": "merge minor and patch collection updates into a single PR",
+				"groupName": "ansible collections - all minor and patch updates",
+				"extends": [
+					"schedule:automergeNonOfficeHours"
+				],
+				"matchUpdateTypes": [
+					"minor",
+					"patch"
+				],
+				"automerge": true,
+				"addLabels": [
+					"automerge"
+				]
+			},
+			{
+				"description": "collection majors can drop modules - review by hand",
+				"matchUpdateTypes": [
+					"major"
+				],
+				"automerge": false
+			}
+		]
+	},
+	"ansible": {
+		"labels": [
+			"dependencies",
+			"ansible",
+			"docker"
+		],
+		"automerge": false
+	},
+	"customManagers": [
+		{
+			"description": "Molecule platform images, pinned by digest and annotated with a renovate comment",
+			"customType": "regex",
+			"managerFilePatterns": [
+				"/(^|/)molecule/.+/molecule\\.ya?ml$/"
+			],
+			"matchStrings": [
+				"#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)[^\\n]*\\n(?:[^\\S\\n]*#[^\\n]*\\n)*[^\\S\\n]*image:\\s*[\"']?[^\"'\\n]+:(?<currentValue>[\\w.\\-]+)@(?<currentDigest>sha256:[a-f0-9]{64})[\"']?"
+			],
+			"datasourceTemplate": "docker"
+		}
+	],
+	"packageRules": [
+		{
+			"description": "Label all major updates clearly so they stand out for review",
+			"matchManagers": [
+				"pip_requirements",
+				"ansible-galaxy",
+				"ansible"
+			],
+			"matchUpdateTypes": [
+				"major"
+			],
+			"addLabels": [
+				"major-update"
+			]
+		},
+		{
+			"description": "Molecule test images are test-only - group and automerge",
+			"matchManagers": [
+				"custom.regex"
+			],
+			"groupName": "molecule test images",
+			"labels": [
+				"dependencies",
+				"molecule"
+			],
+			"automerge": true,
+			"extends": [
+				"schedule:automergeNonOfficeHours"
+			],
+			"addLabels": [
+				"automerge"
+			]
+		}
+	]
+}

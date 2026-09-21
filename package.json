@@ -1,12 +1,14 @@
 {
   "name": "@digicatapult/renovate-config",
-  "version": "0.10.190",
+  "version": "0.11.0",
   "description": "Renovate Preset for Digital Catapult",
   "files": [
+    "ansible.json",
     "default.json",
+    "flux.json",
     "helm.json",
     "poetry.json",
-    "flux.json"
+    "terraform.json"
   ],
   "repository": "git://github.com/digicatapult/renovate-config",
   "homepage": "https://github.com/digicatapult/renovate-config",
@@ -17,7 +19,7 @@
   },
   "author": "Digital Catapult (https://www.digicatapult.org.uk/)",
   "scripts": {
-    "test": "renovate-config-validator default.json helm.json poetry.json flux.json"
+    "test": "renovate-config-validator $(node -p \"require('./package.json').files.join(' ')\")"
   },
   "devDependencies": {
     "renovate": "^44.97.5"
