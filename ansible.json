@@ -28,8 +28,30 @@
 				"extends": [
 					"schedule:automergeNonOfficeHours"
 				],
+				"matchPackageNames": [
+					"!ansible-core",
+					"!ansible"
+				],
 				"matchUpdateTypes": [
 					"minor",
+					"patch"
+				],
+				"automerge": true,
+				"addLabels": [
+					"automerge"
+				]
+			},
+			{
+				"description": "ansible-core patches are bug fixes only, so they stay in the automerged group",
+				"groupName": "ansible tooling - all minor and patch updates",
+				"extends": [
+					"schedule:automergeNonOfficeHours"
+				],
+				"matchPackageNames": [
+					"ansible-core",
+					"ansible"
+				],
+				"matchUpdateTypes": [
 					"patch"
 				],
 				"automerge": true,
@@ -47,10 +69,7 @@
 					"major",
 					"minor"
 				],
-				"automerge": false,
-				"addLabels": [
-					"major-update"
-				]
+				"automerge": false
 			}
 		]
 	},
@@ -81,10 +100,7 @@
 				"matchUpdateTypes": [
 					"major"
 				],
-				"automerge": false,
-				"addLabels": [
-					"major-update"
-				]
+				"automerge": false
 			}
 		]
 	},
@@ -110,6 +126,20 @@
 		}
 	],
 	"packageRules": [
+		{
+			"description": "Label all major updates clearly so they stand out for review",
+			"matchManagers": [
+				"pip_requirements",
+				"ansible-galaxy",
+				"ansible"
+			],
+			"matchUpdateTypes": [
+				"major"
+			],
+			"addLabels": [
+				"major-update"
+			]
+		},
 		{
 			"description": "Molecule test images are test-only - group and automerge",
 			"matchManagers": [
