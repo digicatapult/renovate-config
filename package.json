@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/renovate-config",
-  "version": "0.11.10",
+  "version": "0.11.11",
   "description": "Renovate Preset for Digital Catapult",
   "files": [
     "ansible.json",
@@ -22,6 +22,6 @@
     "test": "renovate-config-validator $(node -p \"require('./package.json').files.join(' ')\")"
   },
   "devDependencies": {
-    "renovate": "^44.121.4"
+    "renovate": "^44.126.0"
   }
 }
