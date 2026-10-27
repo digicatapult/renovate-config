@@ -1,6 +1,7 @@
 {
 	"extends": [
 		"config:recommended",
+		"docker:pinDigests",
 		":rebaseStalePrs",
 		":timezone(Europe/London)"
 	],
@@ -190,6 +191,26 @@
 			"labels": [
 				"dependencies",
 				"docker"
+			]
+		},
+		{
+			"description": "Base image patch and digest updates are how OS and runtime CVE fixes (e.g. Node2Shell, CVE-2026-111497) reach our images behind floating tags, so merge them automatically. Major and minor updates stay in the reviewed 'Docker - updates' group.",
+			"matchManagers": [
+				"dockerfile",
+				"docker-compose"
+			],
+			"matchUpdateTypes": [
+				"patch",
+				"digest",
+				"pinDigest"
+			],
+			"groupName": "Docker - patch and digest updates",
+			"automerge": true,
+			"extends": [
+				"schedule:automergeNonOfficeHours"
+			],
+			"addLabels": [
+				"automerge"
 			]
 		},
 		{
