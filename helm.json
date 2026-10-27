@@ -46,6 +46,13 @@
 				"dependencies",
 				"helm"
 			]
+		},
+		{
+			"description": "Chart.yaml appVersion is used as the image tag and has no digest capture group, so don't inherit docker:pinDigests from the default preset here",
+			"matchManagers": [
+				"custom.regex"
+			],
+			"pinDigests": false
 		}
 	]
 }

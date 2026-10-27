@@ -40,6 +40,14 @@ Add this into your application repositories `renovate.json`:
 }
 ```
 
+Docker image behaviour (Dockerfiles and Compose files):
+
+- **Digests are pinned** (`docker:pinDigests`), e.g. `node:24-alpine` becomes `node:24-alpine@sha256:…`. Without a digest Renovate only looks for a newer tag at the same precision, so a floating tag like `24-alpine` never gets a PR for a patch release or a base-OS rebuild, and already-built images keep whatever was current when they were built.
+- **Patch and digest updates automerge** outside office hours, grouped as `Docker - patch and digest updates`. These are how runtime and OS security fixes reach our images.
+- **Major and minor updates need review**, grouped as `Docker - updates`.
+
+Prefer an exact version as well as the digest (`node:24.22.1-alpine@sha256:…`), so the running version is visible in the Dockerfile.
+
 #### Terraform / Terragrunt repositories
 
 For repositories containing Terraform or Terragrunt infrastructure code (e.g. `*-tf-infra`, `*-terragrunt-infra`), use the `terraform` preset instead:
