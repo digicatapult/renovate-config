@@ -46,7 +46,7 @@ Docker image behaviour (Dockerfiles and Compose files):
 - **Patch and digest updates automerge** outside office hours, grouped as `Docker - patch and digest updates`. These are how runtime and OS security fixes reach our images.
 - **Major and minor updates need review**, grouped as `Docker - updates`.
 
-Node.js major upgrades are grouped into one `Node.js major` PR covering the `node` Docker image, `actions/setup-node` `node-version` and `package.json` `engines.node`. Other `engines` entries also get major updates, but minor and patch `engines` updates are disabled.
+Node.js major upgrades are grouped into one `Node.js major` PR covering the `node` Docker image, `actions/setup-node` `node-version`, `package.json` `engines.node` and `@types/node`. All of these move to a new Node.js major only once it becomes LTS. Other `engines` entries also get major updates, but minor and patch `engines` updates are disabled.
 
 Prefer an exact version as well as the digest (`node:24.22.1-alpine@sha256:…`), so the running version is visible in the Dockerfile.
 
