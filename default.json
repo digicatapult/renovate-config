@@ -235,6 +235,7 @@
 			],
 			"matchDatasources": [
 				"docker",
+				"github-releases",
 				"node-version"
 			],
 			"matchUpdateTypes": [
