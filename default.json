@@ -81,9 +81,13 @@
 				]
 			},
 			{
-				"description": "disable package.json > engines update",
+				"description": "disable package.json > engines minor/patch updates (majors still update)",
 				"matchDepTypes": [
 					"engines"
+				],
+				"matchUpdateTypes": [
+					"minor",
+					"patch"
 				],
 				"enabled": false
 			},
@@ -223,6 +227,20 @@
 			  "digicatapult/QTAP"
 			],
 			"addLabels": ["non-production"]
-		  }
+		  },
+		{
+			"description": "Group Node.js major upgrades (Docker images, setup-node versions and package.json engines) into a single PR",
+			"matchDepNames": [
+				"node"
+			],
+			"matchDatasources": [
+				"docker",
+				"node-version"
+			],
+			"matchUpdateTypes": [
+				"major"
+			],
+			"groupName": "Node.js major"
+		}
 	]
 }
