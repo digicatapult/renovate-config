@@ -230,8 +230,9 @@
 		  },
 		{
 			"description": "Group Node.js major upgrades (Docker images, setup-node versions and package.json engines) into a single PR",
-			"matchDepNames": [
-				"node"
+			"matchPackageNames": [
+				"/(?:^|/)node$/",
+				"actions/node-versions"
 			],
 			"matchDatasources": [
 				"docker",
