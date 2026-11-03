@@ -1,6 +1,310 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>digicatapult/renovate-config"
-  ]
+	"extends": [
+		"config:recommended",
+		"docker:pinDigests",
+		":rebaseStalePrs",
+		":timezone(Europe/London)"
+	],
+	"enabledManagers": [
+		"npm",
+		"dockerfile",
+		"docker-compose",
+		"github-actions",
+		"cargo",
+		"nuget",
+		"custom.regex"
+	],
+	"customManagers": [
+		{
+			"customType": "regex",
+			"description": "Update node_version inputs in GitHub Actions workflows",
+			"managerFilePatterns": [
+				"/(^|/)\\.github/workflows/.*\\.ya?ml$/"
+			],
+			"matchStrings": [
+				"node_version:\\s*['\"]?(?<currentValue>\\d+(?:\\.\\d+)*(?:\\.x)?)"
+			],
+			"depNameTemplate": "node",
+			"datasourceTemplate": "node-version",
+			"versioningTemplate": "node"
+		}
+	],
+	"cargo": {
+		"labels": [
+			"dependencies",
+			"rust"
+		],
+		"rangeStrategy": "bump",
+		"bumpVersion": "patch",
+		"automerge": false,
+		"lockFileMaintenance": {
+			"enabled": true,
+			"recreateWhen": "always",
+			"rebaseWhen": "behind-base-branch",
+			"branchTopic": "cargo-lock-maintenance",
+			"schedule": [
+				"after 12pm on sunday"
+			],
+			"addLabels": [
+					"lock-files"
+				]
+		},
+		"packageRules": [
+			{
+				"description": "merge minor and patch updates into a single PR",
+				"groupName": "rust - all minor and patch updates",
+				"extends": [
+					"schedule:automergeNonOfficeHours"
+				],
+				"matchUpdateTypes": [
+					"minor",
+					"patch"
+				]
+			}
+		]
+	},
+	"npm": {
+		"labels": [
+			"dependencies",
+			"npm"
+		],
+		"extends": [
+			"security:minimumReleaseAgeNpm"
+		],
+		"rangeStrategy": "bump",
+		"bumpVersion": "patch",
+		"automergeType": "pr",
+		"recreateWhen": "always",
+		"major": {
+			"automerge": false
+		},
+		"packageRules": [
+			{
+				"description": "merge minor and patch updates into a single PR",
+				"groupName": "npm - all minor and patch updates",
+				"extends": [
+					"schedule:automergeNonOfficeHours"
+				],
+				"matchUpdateTypes": [
+					"minor",
+					"patch"
+				],
+				"automerge": true,
+				"minimumReleaseAge": "3 days",
+				"addLabels": [
+					"automerge"
+				]
+			},
+			{
+				"description": "disable package.json > engines minor/patch updates (majors still update)",
+				"matchDepTypes": [
+					"engines"
+				],
+				"matchUpdateTypes": [
+					"minor",
+					"patch"
+				],
+				"enabled": false
+			},
+			{
+				"description": "disable package.json > engines updates other than Node.js",
+				"matchDepTypes": [
+					"engines"
+				],
+				"matchPackageNames": [
+					"!node"
+				],
+				"enabled": false
+			},
+			{
+				"description": "preserve major-only Node.js engine ranges",
+				"matchDepTypes": [
+					"engines"
+				],
+				"matchPackageNames": [
+					"node"
+				],
+				"matchCurrentValue": "/^\\d+\\.x$/",
+				"rangeStrategy": "replace"
+			},
+			{
+				"description": "Replace tsimp with @digicatapult/tsimp at version 2.0.12",
+				"matchPackageNames": [
+					"tsimp"
+				],
+				"replacementName": "@digicatapult/tsimp",
+				"replacementVersion": "2.0.12"
+			},
+			{
+				"description": "disable all Axios package updates until further notice",
+				"matchPackageNames": ["axios**"],
+				"enabled": false
+			},
+			{
+				"description": "group all eslint-related updates into one PR",
+				"extends": ["packages:eslint"],
+				"groupName": "eslint",
+				"matchUpdateTypes": ["major"]
+			}
+		],
+		"postUpdateOptions": [
+			"npmInstallTwice"
+		],
+		"lockFileMaintenance": {
+			"enabled": true,
+			"recreateWhen": "always",
+			"rebaseWhen": "behind-base-branch",
+			"branchTopic": "package-lock-maintenance",
+			"schedule": [
+				"after 12pm on sunday"
+			]
+		}
+	},
+	"nuget": {
+        "labels": [
+            "dependencies",
+            "nuget"
+        ],
+        "rangeStrategy": "bump",
+        "bumpVersion": "patch",
+        "recreateWhen": "always",
+        "major": {
+            "automerge": false
+        },
+        "packageRules": [
+            {
+                "description": "merge minor and patch updates into a single PR",
+                "groupName": "nuget - all minor and patch updates",
+                "extends": [
+                    "schedule:automergeNonOfficeHours"
+                ],
+                "matchUpdateTypes": [
+                    "minor",
+                    "patch"
+                ],
+                "automerge": true,
+                "minimumReleaseAge": "3 days",
+				"addLabels": [
+					"automerge"
+				]
+            }
+        ]
+    },
+	"github-actions": {
+		"labels": [
+			"dependencies",
+			"github-actions"
+		],
+		"groupName": "GitHub Actions - updates",
+		"packageRules": [
+			{
+				"matchUpdateTypes": [
+					"major",
+					"minor",
+					"patch"
+				],
+				"matchPackageNames": [
+					"actions/checkout",
+					"actions/setup-node",
+					"actions/setup-python",
+					"actions/cache",
+					"trufflesecurity/trufflehog"
+				],
+				"automerge": true,
+				"groupName": "Github-Actions - trusted updates",
+				"extends": [
+					"schedule:automergeNonOfficeHours"
+				],
+				"addLabels": [
+					"automerge"
+				]
+			}
+		]
+	},
+	"packageRules": [
+		{
+			"matchManagers": [
+				"dockerfile",
+				"docker-compose"
+			],
+			"groupName": "Docker - updates",
+			"labels": [
+				"dependencies",
+				"docker"
+			]
+		},
+		{
+			"description": "Base image patch and digest updates are how OS and runtime CVE fixes (e.g. Node2Shell, CVE-2026-111497) reach our images behind floating tags, so merge them automatically. Major and minor updates stay in the reviewed 'Docker - updates' group.",
+			"matchManagers": [
+				"dockerfile",
+				"docker-compose"
+			],
+			"matchUpdateTypes": [
+				"patch",
+				"digest",
+				"pinDigest"
+			],
+			"groupName": "Docker - patch and digest updates",
+			"automerge": true,
+			"extends": [
+				"schedule:automergeNonOfficeHours"
+			],
+			"addLabels": [
+				"automerge"
+			]
+		},
+		{
+			"description": "Apply non-production labels to all non-production repos.",
+			"matchRepositories": [
+			  "digicatapult/bridgeAI*",
+			  "digicatapult/nice-fetch-ai-adapter",
+			  "digicatapult/sqnc*",
+			  "digicatapult/ds-demos-zk*",
+			  "digicatapult/QTAP"
+			],
+			"addLabels": ["non-production"]
+		  },
+		{
+			"description": "Group Node.js major upgrades for Docker images, node-version dependencies and setup-node into a single PR",
+			"matchPackageNames": [
+				"/(?:^|/)node$/",
+				"!calico/node",
+				"!kindest/node",
+				"!ghcr.io/devcontainers/features/node",
+				"actions/node-versions"
+			],
+			"matchDatasources": [
+				"docker",
+				"github-releases",
+				"node-version"
+			],
+			"matchUpdateTypes": [
+				"major"
+			],
+			"groupName": "Node.js major"
+		},
+		{
+			"description": "Group @types/node major updates with Node.js runtime upgrades",
+			"matchPackageNames": [
+				"@types/node"
+			],
+			"matchDatasources": [
+				"npm"
+			],
+			"matchUpdateTypes": [
+				"major"
+			],
+			"groupName": "Node.js major"
+		},
+		{
+			"description": "Use Node.js versioning for @types/node so a new major is only offered once that Node.js version is LTS, matching the runtime updates above",
+			"matchDatasources": [
+				"npm"
+			],
+			"matchPackageNames": [
+				"@types/node"
+			],
+			"versioning": "node"
+		}
+	]
 }

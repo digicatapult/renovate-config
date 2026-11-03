@@ -11,7 +11,23 @@
 		"docker-compose",
 		"github-actions",
 		"cargo",
-		"nuget"
+		"nuget",
+		"custom.regex"
+	],
+	"customManagers": [
+		{
+			"customType": "regex",
+			"description": "Update node_version inputs in GitHub Actions workflows",
+			"managerFilePatterns": [
+				"/(^|/)\\.github/workflows/.*\\.ya?ml$/"
+			],
+			"matchStrings": [
+				"node_version:\\s*['\"]?(?<currentValue>\\d+(?:\\.\\d+)*(?:\\.x)?)"
+			],
+			"depNameTemplate": "node",
+			"datasourceTemplate": "node-version",
+			"versioningTemplate": "node"
+		}
 	],
 	"cargo": {
 		"labels": [
@@ -89,6 +105,27 @@
 					"patch"
 				],
 				"enabled": false
+			},
+			{
+				"description": "disable package.json > engines updates other than Node.js",
+				"matchDepTypes": [
+					"engines"
+				],
+				"matchPackageNames": [
+					"!node"
+				],
+				"enabled": false
+			},
+			{
+				"description": "preserve major-only Node.js engine ranges",
+				"matchDepTypes": [
+					"engines"
+				],
+				"matchPackageNames": [
+					"node"
+				],
+				"matchCurrentValue": "/^\\d+\\.x$/",
+				"rangeStrategy": "replace"
 			},
 			{
 				"description": "Replace tsimp with @digicatapult/tsimp at version 2.0.12",
@@ -228,17 +265,35 @@
 			"addLabels": ["non-production"]
 		  },
 		{
-			"description": "Group Node.js major upgrades (Docker images, setup-node versions, package.json engines and @types/node) into a single PR",
+			"description": "Disable minor and patch updates for workflow node_version inputs",
+			"matchManagers": [
+				"custom.regex"
+			],
+			"matchDatasources": [
+				"node-version"
+			],
 			"matchPackageNames": [
-				"node",
-				"@types/node",
+				"node"
+			],
+			"matchUpdateTypes": [
+				"minor",
+				"patch"
+			],
+			"enabled": false
+		},
+		{
+			"description": "Group Node.js major upgrades for Docker images, node-version dependencies and setup-node into a single PR",
+			"matchPackageNames": [
+				"/(?:^|/)node$/",
+				"!calico/node",
+				"!kindest/node",
+				"!ghcr.io/devcontainers/features/node",
 				"actions/node-versions"
 			],
 			"matchDatasources": [
 				"docker",
 				"github-releases",
-				"node-version",
-				"npm"
+				"node-version"
 			],
 			"matchUpdateTypes": [
 				"major"
@@ -246,14 +301,17 @@
 			"groupName": "Node.js major"
 		},
 		{
-			"description": "Use Node.js versioning for @types/node so a new major is only offered once that Node.js version is LTS, matching the runtime updates above",
-			"matchDatasources": [
-				"npm"
-			],
+			"description": "Group @types/node major updates with Node.js runtime upgrades",
 			"matchPackageNames": [
 				"@types/node"
 			],
-			"versioning": "node"
+			"matchDatasources": [
+				"npm"
+			],
+			"matchUpdateTypes": [
+				"major"
+			],
+			"groupName": "Node.js major"
 		}
 	]
 }
