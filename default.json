@@ -287,6 +287,8 @@
 				"/(?:^|/)node$/",
 				"!calico/node",
 				"!kindest/node",
+				"!docker.io/calico/node",
+				"!docker.io/kindest/node",
 				"!ghcr.io/devcontainers/features/node",
 				"actions/node-versions"
 			],
