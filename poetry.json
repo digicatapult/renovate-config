@@ -43,6 +43,13 @@
 				]
 			},
 			{
+				"description": "only update the Python constraint when it no longer allows the new version",
+				"matchDepNames": [
+					"python"
+				],
+				"rangeStrategy": "replace"
+			},
+			{
 				"description": "pin boto3 to prevent frequent releases being resolved by Poetry before passing minimum age",
 				"matchPackageNames": [
 					"boto3"
