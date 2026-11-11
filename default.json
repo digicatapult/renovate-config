@@ -314,6 +314,17 @@
 				"major"
 			],
 			"groupName": "Node.js major"
+		},
+		{
+			"description": "Group Python minor and major upgrades (Docker, setup-python and Poetry) into a single PR",
+			"matchDepNames": [
+				"/(?:^|/)python$/"
+			],
+			"matchUpdateTypes": [
+				"minor",
+				"major"
+			],
+			"groupName": "Python version"
 		}
 	]
 }
