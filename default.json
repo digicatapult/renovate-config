@@ -316,7 +316,13 @@
 			"groupName": "Node.js major"
 		},
 		{
-			"description": "Group Python minor and major upgrades (Docker, setup-python and Poetry) into a single PR",
+			"description": "Group Python minor and major upgrades, one PR per update type. timestamp-optional lets registries without timestamps (e.g. dhi.io) update",
+			"matchManagers": [
+				"dockerfile",
+				"docker-compose",
+				"github-actions",
+				"poetry"
+			],
 			"matchDepNames": [
 				"/(?:^|/)python$/"
 			],
@@ -325,7 +331,8 @@
 				"major"
 			],
 			"groupName": "Python version",
-			"minimumReleaseAge": "3 days"
+			"minimumReleaseAge": "3 days",
+			"minimumReleaseAgeBehaviour": "timestamp-optional"
 		}
 	]
 }
