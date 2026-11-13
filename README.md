@@ -48,6 +48,8 @@ Docker image behaviour (Dockerfiles and Compose files):
 
 Node.js major upgrades are grouped into one `Node.js major` PR per repository. The group covers Docker images with package names `node` or ending in `/node` (including registry-qualified names such as `dhi.io/node`), `actions/setup-node` `node-version`, explicit `node_version` caller arguments, `package.json` `engines.node` and `@types/node`. Custom `node_version` entries update for major releases only, once the new Node.js major becomes LTS. Calls without an explicit `node_version` use the default configured by their shared workflow. Updates to other `engines` entries are currently disabled.
 
+Python minor and major upgrades are grouped into a `Python version` PR per update type in each repository. The group covers Docker images named `python` or ending in `/python`, `actions/setup-python` `python-version` and Poetry `python` constraints. Updates wait 3 days after release, except for registries without release timestamps, such as `dhi.io/python`. Poetry `python` constraints use `replace`, and two-sided constraints such as `>=3.10,<3.13` use `widen` to keep the minimum version.
+
 Prefer an exact version as well as the digest (`node:24.22.1-alpine@sha256:…`), so the running version is visible in the Dockerfile.
 
 #### Terraform / Terragrunt repositories

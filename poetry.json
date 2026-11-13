@@ -33,6 +33,9 @@
 					"minor",
 					"patch"
 				],
+				"matchDepNames": [
+					"!python"
+				],
 				"automerge": true,
 				"minimumReleaseAge": "3 days",
 				"addLabels": [
@@ -40,10 +43,19 @@
 				]
 			},
 			{
-				"matchPackageNames": [
+				"description": "only update the Python constraint when it no longer allows the new version",
+				"matchDepNames": [
 					"python"
 				],
-				"enabled": false
+				"rangeStrategy": "replace"
+			},
+			{
+				"description": "keep the minimum Python version in two-sided constraints such as >=3.10,<3.13",
+				"matchDepNames": [
+					"python"
+				],
+				"matchCurrentValue": "/,/",
+				"rangeStrategy": "widen"
 			},
 			{
 				"description": "pin boto3 to prevent frequent releases being resolved by Poetry before passing minimum age",
